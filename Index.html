@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .gallery {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+     gap: 10px;
+     padding: 20px;
+ }
+ .gallery-item {
+     overflow: hidden;
+ }
+ .gallery-item img {
+     width: 100%;
+     height: auto;
+     display: block;
+ }
+ .modal {
+     display: none;
+     position: fixed;
+     z-index: 1;
+     padding-top: 100px;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     overflow: auto;
+     background-color: rgba(0, 0, 0, 0.9);
+ }
+ .modal-content {
+     margin: auto;
+     display: block;
+     max-width: 90%;
+     max-height: 90%;
+ }
+
+ .close {
+     position: absolute;
+     top: 15px;
+     right: 35px;
+     color: #f1f1f1;
+     font-size: 40px;
+     font-weight: bold;
+     transition: 0.3s;
+ }
+
+ .close:hover,
+ .close:focus {
+     color: #bbb;
+     text-decoration: none;
+     cursor: pointer;
+ }
+
+ h1 {
+  text-shadow: 2px 2px 5px red;
+  text-align: center;
+  text-decoration-line: underline;
+  text-decoration-color:black;  
+  text-decoration-style: wavy;  
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Image Gallery</title>
+</head>
+<body>
+    <!-- Heading Name -->
+    <div class="heading">
+        <h1>Image Gallery</h1>
+    </div>
+    <!-- Image Gallery section all images in one div -->
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src=
+"https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=1024x1024&w=0&k=20&c=z8_rWaI8x4zApNEEG9DnWlGXyDIXe-OmsAyQ5fGPVV8=" style="width:400px;height:200px;"
+                onclick="openModal(
+                    'https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=1024x1024&w=0&k=20&c=z8_rWaI8x4zApNEEG9DnWlGXyDIXe-OmsAyQ5fGPVV8=')"
+                alt="Image 1">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://static.toiimg.com/photo/66679102.cms" style="width: 400px;height: 200px;"
+                onclick="openModal(
+'https://static.toiimg.com/photo/66679102.cms')"
+                alt="Image 2">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyq4zQmofE4Vw0-fdeTSaJVExwxDlrJmh3yQ&s" style="width: 400px;height: 200px;"
+                onclick="openModal(
+'https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/19397812/1048232144.jpg.jpg?quality=90&strip=all&crop=0,0.0044935741889063,100,99.991012851622')"
+                alt="Image 3">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE_n0ju-XxVvL31Cn0UAPJiy2PYUfOLDOgjA&s" style="width: 400px;height: 200px;"
+                onclick="openModal(
+'https://www.travelandleisure.com/thmb/LX4znxqtKQYJ3QPu4ArNCuvJw_s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/seljalandsfoss-iceland-1-WATERFALLS1021-e9c2348a42c841d5b9d661d16dcdcf8c.jpg')"
+                alt="Image 4">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://img.freepik.com/free-photo/weather-effects-composition_23-2149853295.jpg" style="width: 400px;height: 200px;"
+                onclick="openModal(
+'https://img.freepik.com/free-photo/weather-effects-composition_23-2149853295.jpg')"
+                alt="Image 5">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROuIGYKr8z0wIVgT_PEbUvtEM_CkWdQQo2zg&s" style="width: 400px;height: 200px;"
+                onclick="openModal(
+'https://www.metroparks.net/wp-content/uploads/2017/06/1080p_HBK_autumn-morning_GI.jpg')"
+                alt="Image 6">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.timeout.com/images/106150176/image.jpg" style="width: 400px; height: 200px;"
+                onclick="openModal(
+'https://media.timeout.com/images/106150176/image.jpg')"
+                alt="Image 7">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://www.reconnectwithnature.org/getmedia/ac69931e-2e55-4e30-b0cc-e91d5a09aad2/MammatusClouds-Shutterstock-jpg.jpg" style="width: 400px; height: 200px;"
+                onclick="openModal(
+'https://www.reconnectwithnature.org/getmedia/ac69931e-2e55-4e30-b0cc-e91d5a09aad2/MammatusClouds-Shutterstock-jpg.jpg')"
+                alt="Image 8">
+        </div>
+    </div>
+    <!-- Modal for Image Display -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    <!-- JavaScript for Modal -->
+    <script>
+        function openModal(src) {
+            document.getElementById("modalImage").src = src;
+            document.getElementById("myModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
